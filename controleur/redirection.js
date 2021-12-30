@@ -10,4 +10,8 @@ export class redirection {
   connection() {
     window.location.href = "./connection.php";
   }
+
+  accueil() {
+    window.location.href = "/ExamenPOO/vue/index.js"
+  }
 }

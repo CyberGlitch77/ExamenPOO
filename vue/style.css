@@ -1,0 +1,60 @@
+HTML CSSResult Skip Results Iframe
+EDIT ON
+/*Reset CSS*/
+*{
+    min-height: 100vh;
+    margin: 0px;
+    padding: 0px;
+    font-family: Avenir, sans-serif;
+}
+
+nav{
+    width: 100%;
+    margin: 0 auto;
+    background-color: rgb(42, 148, 104);
+    position: sticky;
+    top: 0px;
+}
+
+nav ul{
+    list-style-type: none;
+}
+
+nav ul li{
+    float: left;
+    width: 10%;
+    text-align: center;
+    position: relative;
+}
+
+nav a{
+    display: block;
+    text-decoration: none;
+    color: rgb(160, 32, 32);
+    border-bottom: 2px solid transparent;
+    padding: 10px 0px;
+}
+
+#left{
+    float: right;
+}
+
+.titre{
+    text-align: center;
+}
+
+.centrer{
+    margin-left: auto;
+    margin-right: auto;  
+}
+
+#footer {
+    position: fixed;
+    padding: 5px;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: rgb(0, 0, 0);
+    color: white;
+    text-align: center;  /* Footer height */
+  }
