@@ -1,17 +1,24 @@
 -- phpMyAdmin SQL Dump
--- version 4.6.5.2
+-- version 5.0.4
 -- https://www.phpmyadmin.net/
 --
--- Client :  localhost:8889
--- Généré le :  Dim 21 Mai 2017 à 14:16
--- Version du serveur :  5.6.35
--- Version de PHP :  7.0.15
+-- Hôte : 127.0.0.1
+-- Généré le : Dim 02 jan. 2022 à 18:05
+-- Version du serveur :  10.4.17-MariaDB
+-- Version de PHP : 8.0.2
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
 SET time_zone = "+00:00";
 
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
 --
--- Base de données :  `quiz`
+-- Base de données : `quiz`
 --
 
 -- --------------------------------------------------------
@@ -21,17 +28,17 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `quiz` (
-	`num_quest` int(11) NOT NULL,
-	`question` varchar(150) NOT NULL,
-	`r1` varchar(150) NOT NULL,
-	`r2` varchar(150) NOT NULL,
-	`r3` varchar(150) NOT NULL,
-	`r4` varchar(150) NOT NULL,
-	`reponse` int(11) NOT NULL
+  `num_quest` int(11) NOT NULL,
+  `question` varchar(150) NOT NULL,
+  `r1` varchar(150) NOT NULL,
+  `r2` varchar(150) NOT NULL,
+  `r3` varchar(150) NOT NULL,
+  `r4` varchar(150) NOT NULL,
+  `reponse` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Contenu de la table `quiz`
+-- Déchargement des données de la table `quiz`
 --
 
 INSERT INTO `quiz` (`num_quest`, `question`, `r1`, `r2`, `r3`, `r4`, `reponse`) VALUES
@@ -76,12 +83,38 @@ INSERT INTO `quiz` (`num_quest`, `question`, `r1`, `r2`, `r3`, `r4`, `reponse`) 
 (39, 'Spokie, Snowy, Milu, Bobble, Terry... sont les noms donnés à Milou dans diffèrentes traductions. Cherchez l\'intrus pour Tintin :                      ', 'Ten-Ten                                                                                             ', 'Tantan                                                                                              ', 'Titinne                                                                                             ', 'Tintim                                                                                              ', 3),
 (40, 'Parmi les 22 albums, sur quelle couverture Tintin est-il représenté avec une arme à la main ?                                                         ', 'L\'oreille cassée                                                                                    ', 'Vol 714 pour Sidney                                                                                 ', 'L\'affaire Tournesol                                                                                 ', 'Tintin et les Picaros                                                                               ', 2);
 
+-- --------------------------------------------------------
+
 --
--- Index pour les tables exportées
+-- Structure de la table `utilisateurs`
+--
+
+CREATE TABLE `utilisateurs` (
+  `num_user` int(11) NOT NULL,
+  `pseudo` varchar(12) NOT NULL,
+  `email` varchar(25) NOT NULL,
+  `password` varchar(12) NOT NULL,
+  `admin` int(11) NOT NULL,
+  `score` int(11) NOT NULL DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Index pour les tables déchargées
 --
 
 --
 -- Index pour la table `quiz`
 --
 ALTER TABLE `quiz`
-	ADD PRIMARY KEY (`num_quest`);
+  ADD PRIMARY KEY (`num_quest`);
+
+--
+-- Index pour la table `utilisateurs`
+--
+ALTER TABLE `utilisateurs`
+  ADD PRIMARY KEY (`num_user`);
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
