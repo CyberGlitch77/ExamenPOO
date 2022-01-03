@@ -3,10 +3,6 @@
 class connectionBDD
 {
 
-    // Initialisations générales
-    private $max_quest = 10; // Nbre maximum de questions à poser par quiz
-    private $nbr_rec = 0; // nombre de records dans la table (inconnu au départ)
-
     public function __construct()
     {
     }
@@ -68,10 +64,11 @@ class connectionBDD
     {
         try {
             $connexion = $this->connection();
-            $requete = $connexion->prepare("INSERT INTO utilisateurs (pseudo, email, password, admin) VALUES ($pseudo, $email, $password, 0)");
+            $requete = $connexion->prepare("INSERT INTO `utilisateurs`(`num_user`, `pseudo`, `email`, `password`, `admin`) VALUES ('null', '$pseudo', '$email', '$password', '0')");
             $requete->execute();
         } catch (PDOException $e) {
             echo $e->getMessage();
         }
     }
 }
+?>

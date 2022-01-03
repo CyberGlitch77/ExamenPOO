@@ -1,5 +1,7 @@
 <?php
 
+include_once "../controleur/accesBDD.php";
+
 class formulaireInscription extends connectionBDD
 {
 
@@ -13,17 +15,17 @@ class formulaireInscription extends connectionBDD
 
     function verificationPseudo(string $pseudo)
     {
-        switch (false) {
+        switch (true) {
 
-            case (preg_match('/^[\w\d]{3,12}$/', $pseudo)):
-
+            case (!preg_match('/^[\w\d]{3,12}/', $pseudo)):
+                echo preg_match('/^[\w\d]{3,12}/', $pseudo);
                 echo "❌ Votre pseudo doit avoir entre 3 et 12 caractères<br>";
 
-            case (preg_match('/^.*[a-zA-Z].*$/', $pseudo)):
-
+            case (!preg_match('/^.*[a-zA-Z].*$/', $pseudo)):
+                echo preg_match('/^.*[a-zA-Z].*$/', $pseudo);
                 echo "❌ Votre pseudo doit avoir au moins une lettre<br>";
 
-            case (preg_match('/^\d+\.?\d*$/', $pseudo)):
+            case (!preg_match('/^.*\d.*$/', $pseudo)):
 
                 echo "❌ Votre pseudo doit avoir au moins un chiffre";
                 return 0;
@@ -37,7 +39,7 @@ class formulaireInscription extends connectionBDD
 
     function confirmationPseudo(string $pseudo)
     {
-        if (strcmp($pseudo, $this->pseudo)) {
+        if (!strcmp($pseudo, $this->pseudo)) {
             echo "✅ Les pseudos correspondent";
             return 1;
         } else {
@@ -50,41 +52,44 @@ class formulaireInscription extends connectionBDD
     {
         if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
             echo "✅ Votre email est correct";
-            return 1;
+            $resultat = 1;
         } else {
             echo "❌ Votre email est incorrect";
-            return 0;
+            $resultat = 0;
         }
+        return $resultat;
     }
 
     function confirmationEmail(string $email)
     {
-        if (strcmp($email, $this->email)) {
+        if (!strcmp($email, $this->email)) {
             echo "✅ Les emails correspondent";
-            return 1;
+            $resultat = 1;
         } else {
             echo "❌ Les emails ne correspondent pas";
-            return 0;
+            $resultat = 0;
         }
+
+        return $resultat;
     }
 
     function verificationPassword(string $password)
     {
-        switch (false) {
+        switch (true) {
 
-            case (preg_match('/^[\w\d]{8,20}$/', $password)):
-
+            case (!preg_match('/^[\w\d]{8,20}/', $password)):
+                echo preg_match('/^[\w\d]{8,20}/', $password);
                 echo "❌ Votre mot de passe doit avoir entre 8 et 20 caractères<br>";
 
-            case (preg_match('/^.*[a-zA-Z].*$/', $password)):
+            case (!preg_match('/^.*[a-zA-Z].*$/', $password)):
 
                 echo "❌ Votre mot de passe doit avoir au moins une lettre<br>";
 
-            case (preg_match('/^\d+\.?\d*$/', $password)):
+            case (!preg_match('/^.*\d.*$/', $password)):
 
                 echo "❌ Votre mot de passe doit avoir au moins un chiffre<br>";
 
-            case (preg_match('/^.*[\'\/~`\!@#$%\^&\*\(\)_\-\+=\{\}\[\]\|;:"\<\>,\.\?\\\].*$/', $password)):
+            case (!preg_match('/^.*[\'^£$%&*()}{@#~?><>,!:;|=_+¬-].*$/', $password)):
 
                 echo "❌ Votre mot de passe doit avoir au moins un caractère spécial";
                 return 0;
@@ -98,16 +103,18 @@ class formulaireInscription extends connectionBDD
 
     function confirmationPassword(string $password)
     {
-        if (strcmp($password, $this->password)) {
+        if (!strcmp($password, $this->password)) {
             echo "✅ Les mots de passe correspondent";
-            return 1;
+            $resultat = 1;
         } else {
             echo "❌ Les mots de passe ne correspondent pas";
-            return 0;
+            $resultat = 0;
         }
+        return $resultat;
     }
 
     function insertionInscription($pseudo, $email, $password){
         $this->bdd->insertNormalUsers($pseudo, $email, $password);
     }
 }
+?>

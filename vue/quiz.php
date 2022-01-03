@@ -1,13 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
 
-echo "<form method=\"get\" action=\"" . $_SERVER["PHP_SELF"] . "\" >\n";
-echo "<fieldset><legend>Question n° <B>" . $nq . "</b> - Votre score actuel : <b>" . $score . " / " . ($nq - 1) . "</B></legend>\n";
-echo "<table><tr>";
-echo "<th>" . $resultat['question'] . "</th>\n";  // question
-echo "<tr><td><input type=\"radio\" name=\"rep\" value=\"1\"checked=\"checked\">"  . $resultat['r1'] . "</td></tr>\n";
-echo "<tr><td><input type=\"radio\" name=\"rep\" value=\"2\">" . $resultat['r2'] . "</td></tr>\n";
-echo "<tr><td><input type=\"radio\" name=\"rep\" value=\"3\">" . $resultat['r3'] . "</td></tr>\n";
-echo "<tr><td><input type=\"radio\" name=\"rep\" value=\"4\">" . $resultat['r4'] . "</td></tr>\n";
-echo "<tr><td><input type=\"submit\" Value=\"GO\" ></td></tr>\n";
-echo "</table>";
-echo "</fieldset></form>";
-$_SESSION["ok"] = $resultat['reponse'];  //memo de la bonne réponse
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet"  type="text/css" href="./style.css">
+    <title>Document</title>
+</head>
+
+<body>
+    <?php
+    include_once "./menu.php";
+    include_once "../controleur/quiz.php";
+    $quiz = new quiz();
+    $resultat = $quiz->jeu();
+    ?>
+    <form method="get" action="<?php echo $_SERVER['PHP_SELF']; ?>">
+        <fieldset>
+            <legend>Question n° <B>"<?php echo $resultat['rep']; ?>"</b> - Votre score actuel : <b>"<?php echo $score ?>" / "<?php echo ($nq - 1) ?>"</B></legend>
+            <table>
+                <tr>
+                    <th>"<?php echo $resultat['question']; ?>"</th>
+                </tr>
+                <tr>
+                    <td><input type="radio" name="rep" value="1" checked="checked">"<?php echo $resultat['r1']; ?>"</td>
+                </tr>
+                <tr>
+                    <td><input type="radio" name="rep" value="2">"<?php echo $resultat['r2']; ?>"</td>
+                </tr>
+                <tr>
+                    <td><input type="radio" name="rep" value="3">"<?php echo $resultat['r3']; ?>"</td>
+                </tr>
+                <tr>
+                    <td><input type="radio" name="rep" value="4">"<?php echo $resultat['r4']; ?>"</td>
+                </tr>
+                <tr>
+                    <td><input type="submit" Value="GO"></td>
+                </tr>
+            </table>
+        </fieldset>
+    </form>
+    <?php
+    $_SESSION["ok"] = $resultat['reponse']; //memo de la bonne réponse
+    ?>
+</body>
+
+</html>

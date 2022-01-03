@@ -11,7 +11,7 @@
     <?php include_once "./menu.php" ?>
     <h1 class="titre">Connection</h1>
 
-    <form action="connection" method="post" action="../controleur/formulaire.php">
+    <form action="connection" method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
         <table class="centrer">
             <tr>
                 <td> <label for="emailPsw">Pseudo ou e-mail :</label></td>

@@ -11,24 +11,24 @@
     <?php
     include_once "./menu.php";
     include_once "../controleur/formulaireInscription.php";
+    $valid1 = $valid2 = $valid3 = $valid4 = $valid5 = $valid6 = 0;
     if (isset($_POST["pseudo"]) && isset($_POST["email"]) && isset($_POST["psw"])) {
         $form = new formulaireInscription($_POST["pseudo"], $_POST["email"], $_POST["psw"]);
     }
     ?>
-    <h1 id="centrer">Inscription</h1>
+    <h1 class="titre">Inscription</h1>
 
-    <form action="Inscription.php" method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
+    <form action="inscription.php" method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
         <table class="centrer">
             <tr>
                 <td> <label for="pseudo">Pseudo :</label></td>
-                <td> <input type="text" id="pseudo" name="pseudo" value="
+                <td> <input type="text" id="pseudo" name="pseudo"
                 <?php
-                if (isset($_POST["pseudo"])) {
-                    echo $_POST["pseudo"];
-                } else {
-                    echo "";
+                if (isset($_POST["pseudo"]) && !empty($_POST["pseudo"])) { ?>
+                    value="<?php echo $_POST["pseudo"]; ?>"
+                <?php
                 }
-                ?>>" required><br>
+                ?> required><br>
                     <?php
                     if (isset($_POST["pseudo"])) {
                         $valid1 = $form->verificationPseudo($_POST["pseudo"]);
@@ -47,15 +47,15 @@
                 <td> <label for="email">e-mail :</label></td>
                 <td> <input type="email" id="email" name="email" required><br>
                     <?php
-                    if (isset($_POST("email"))) {
-                        $valid3 = $form->verificationEmail($_POST("email"));
+                    if (isset($_POST["email"])) {
+                        $valid3 = $form->verificationEmail($_POST["email"]);
                     } ?></td>
             </tr>
             <tr>
                 <td> <label for="confirmEmail">confirmation de l'e-mail :</label></td>
                 <td> <input type="email" id="confirmEmail" name="confirmEmail" required><br>
                     <?php if (isset($_POST["confirmEmail"]) && $valid3 == 1) {
-                        $valid4 = $form->verificationEmail($_POST["confirmEmail"]);
+                        $valid4 = $form->confirmationEmail($_POST["confirmEmail"]);
                     } ?></td>
             </tr>
             <tr>
@@ -79,7 +79,7 @@
         </table>
     </form>
     <?php
-    if ($valid1 == $valid2 == $valid3 == $valid4 == $valid5 == $valid6 == 1) {
+    if (((((($valid1 == $valid2) && $valid3) && $valid4) && $valid5) && $valid6) == 1) {
 
         try {
             session_set_cookie_params(600);
@@ -93,9 +93,13 @@
         } catch (Exception $e) {
             echo $e->getMessage();
         }
-    }else{
-
-    } 
+    } else {
+        $_POST["confirmPseudo"] = null;
+        $_POST["email"] = null;
+        $_POST["confirmEmail"] = null;
+        $_POST["psw"] = null;
+        $_POST["confirmPsw"] = null;
+    }
     ?>
     <footer id="footer"><?php include_once './footer.php' ?></footer>
 </body>

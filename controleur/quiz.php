@@ -1,6 +1,7 @@
 <?php
 session_set_cookie_params(600);
 session_start();
+include_once "../controleur/accesBDD.php";
 class quiz extends connectionBDD
 {
 
@@ -8,7 +9,7 @@ class quiz extends connectionBDD
    {
       // Initialisations générales
       $this->max_quest = 10; // Nbre maximum de questions à poser par quiz
-      $this->nbr_rec = 0; // nombre de records dans la table (inconnu au départ)
+      $this->nbr_rec = null; // nombre de records dans la table (inconnu au départ)
       $this->bdd = new connectionBDD();
    }
 
@@ -16,7 +17,7 @@ class quiz extends connectionBDD
    {
       $this->nbr_rec = $this->bdd->numQuestions();
 
-      if ($this->nbr_rec == null) {
+      if ($this->nbr_rec != null) {
          if (!isset($_SESSION["nq"]))  // La toute première fois
          {
             $nq = 1;  // nombre de questions posées
@@ -31,8 +32,8 @@ class quiz extends connectionBDD
             $tab_tir = $_SESSION["tab_tir"];
             $score = $_SESSION["score"];
             $ok = $_SESSION["ok"];
-            $rep = $_GET["rep"];
-            if ($rep == $ok) {
+            $resultat['rep'] = $_GET["rep"];
+            if ($resultat['rep'] == $ok) {
                $score++;
             }
             $nq++;
