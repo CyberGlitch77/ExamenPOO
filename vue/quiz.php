@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet"  type="text/css" href="./style.css">
+    <link rel="stylesheet" type="text/css" href="./style.css">
     <title>Document</title>
 </head>
 
@@ -16,6 +16,7 @@
     $quiz = new quiz();
     $resultat = $quiz->jeu();
     ?>
+
     <form method="get" action="<?php echo $_SERVER['PHP_SELF']; ?>">
         <fieldset>
             <legend>Question n° <B>"<?php echo $resultat['rep']; ?>"</b> - Votre score actuel : <b>"<?php echo $score ?>" / "<?php echo ($nq - 1) ?>"</B></legend>

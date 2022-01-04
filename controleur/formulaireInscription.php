@@ -78,7 +78,6 @@ class formulaireInscription extends connectionBDD
         switch (true) {
 
             case (!preg_match('/^[\w\d]{8,20}/', $password)):
-                echo preg_match('/^[\w\d]{8,20}/', $password);
                 echo "❌ Votre mot de passe doit avoir entre 8 et 20 caractères<br>";
 
             case (!preg_match('/^.*[a-zA-Z].*$/', $password)):
@@ -115,6 +114,36 @@ class formulaireInscription extends connectionBDD
 
     function insertionInscription($pseudo, $email, $password){
         $this->bdd->insertNormalUsers($pseudo, $email, $password);
+    }
+
+    function verificationAdmin($pseudo){
+        return $this->bdd->selectAdminInscription($pseudo);
+    }
+
+    function checkEmailPseudo($emailPseudo)
+    {
+
+        $count = $this->bdd->selectUsersPseudo($emailPseudo);
+
+        switch ($count) {
+            case 1:
+                echo "❌ Ce pseudo existe déjà";
+                $resultat = 0;
+                break;
+            case 0:
+                $count = $this->bdd->selectUsersEmail($emailPseudo);
+                switch ($count) {
+                    case 1:
+                        echo "❌ Cet email existe déjà";
+                        $resultat = 0;
+                        break;
+                    case 0:
+                        $resultat = 1;
+                        break;
+                }
+        }
+
+        return $resultat;
     }
 }
 ?>

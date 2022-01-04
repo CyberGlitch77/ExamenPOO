@@ -1,14 +1,18 @@
-HTML CSSResult Skip Results Iframe
-EDIT ON
-/*Reset CSS*/
+@import url("https://fonts.googleapis.com/css2?family=Cairo:wght@200&family=Roboto+Mono:ital,wght@0,100;1,400&display=swap");
 body {
-  background: rgb(192, 106, 106);
+  background-image: url(tintin.jpg);
+  background-position: fixed;
+  font-family: "Cairo", sans-serif;
+  font-family: "Roboto Mono", monospace;
+  color: rgba(0, 0, 0, 0.8);
+  letter-spacing: -0.03em;
+  font-weight: bold;
+  font-size: 15px;
 }
 
 nav {
   width: 100%;
   margin: 0 auto;
-  background-color: rgb(42, 148, 104);
   position: sticky;
   top: 0px;
 }
@@ -19,6 +23,7 @@ nav ul {
 
 nav ul li {
   float: left;
+  font-style: italic;
   width: 10%;
   text-align: center;
   position: relative;
@@ -26,8 +31,9 @@ nav ul li {
 
 nav a {
   display: block;
+  color: rgb(0, 0, 0);
+  background-color: #ffffffab;
   text-decoration: none;
-  color: rgb(160, 32, 32);
   border-bottom: 2px solid transparent;
   padding: 10px 0px;
 }
@@ -38,7 +44,8 @@ nav a {
 
 .titre {
   text-align: center;
-  color: rgb(112, 41, 41);
+  font-style: italic;
+  color: rgb(50, 32, 32);
 }
 
 .centrer {
@@ -55,4 +62,26 @@ nav a {
   background-color: rgb(0, 0, 0);
   color: white;
   text-align: center; /* Footer height */
+}
+
+#bords {
+  border: solid gray 1px;
+  width: 25%;
+  border-radius: 2px;
+  margin: 120px auto;
+  background: rgba(255, 255, 255, 0.822);
+  padding: 5px 25px 10px 25px;
+  border-radius: 30px;
+}
+
+#button {
+  color: #fff;
+  background: #22c566b9;
+  font-style: italic;
+  padding: 7px;
+  margin-left: 70%;
+}
+
+hr{
+  width: 100%;
 }
