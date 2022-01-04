@@ -1,3 +1,7 @@
+<?php
+include_once "../controleur/session.php";
+include_once "../controleur/formulaireInscription.php";
+?>
 <!DOCTYPE html>
 
 <head>
@@ -10,7 +14,6 @@
 <body>
     <?php
     include_once "./menu.php";
-    include_once "../controleur/formulaireInscription.php";
     $valid1 = $valid2 = $valid3 = $valid4 = $valid5 = $valid6 = 0;
     if (isset($_POST["pseudo"]) && isset($_POST["email"]) && isset($_POST["psw"])) {
         $form = new formulaireInscription($_POST["pseudo"], $_POST["email"], $_POST["psw"]);
@@ -48,7 +51,10 @@
                     <td> <input type="email" id="email" name="email" required><br>
                         <?php
                         if (isset($_POST["email"])) {
-                            $valid3 = $form->verificationEmail($_POST["email"]);
+                            $valid3 = $form->checkEmailPseudo($_POST["email"]);
+                            if ($valid3 == 1) {
+                                $valid3 = $form->verificationEmail($_POST["email"]);
+                            }
                         } ?></td>
                 </tr>
                 <tr>
@@ -85,15 +91,13 @@
     if (((((($valid1 == $valid2) && $valid3) && $valid4) && $valid5) && $valid6) == 1) {
 
         try {
-            session_set_cookie_params(600);
-            session_start();
-
             $_SESSION["pseudo"] = $_POST["pseudo"];
             $_SESSION["email"] = $_POST["email"];
             $psw = password_hash($_POST["psw"], PASSWORD_DEFAULT);
             $form->insertionInscription($_POST["pseudo"], $_POST["email"], $psw);
-            $_SESSION["admin"] = $form->verificationAdmin($_SESSION["pseudo"]);
-            header("Location:./quiz.php");
+            $admin = $form->verificationAdmin($_SESSION["pseudo"]);
+            $_SESSION["admin"] = $admin['admin'];
+            header("Location:./index.php");
         } catch (Exception $e) {
             echo $e->getMessage();
         }

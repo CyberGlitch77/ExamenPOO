@@ -105,21 +105,20 @@ class connectionBDD
     {
         try {
             $connexion = $this->connection();
-            $requete = $connexion->prepare("SELECT 'password' FROM utilisateurs where pseudo = '$pseudo'");
+            $requete = $connexion->prepare("SELECT * FROM utilisateurs where pseudo = '$pseudo'");
             $requete->execute();
             $resultat = $requete->fetch();
         } catch (PDOException $e) {
             echo $e->getMessage();
         }
-
         return $resultat;
     }
 
-    function selectUsersEmailPwd($email)
+    function selectUsersEmailPsw($email)
     {
         try {
             $connexion = $this->connection();
-            $requete = $connexion->prepare("SELECT 'password' FROM utilisateurs where email = '$email'");
+            $requete = $connexion->prepare("SELECT * FROM utilisateurs where email = '$email'");
             $requete->execute();
             $resultat = $requete->fetch();
         } catch (PDOException $e) {
@@ -129,10 +128,25 @@ class connectionBDD
         return $resultat;
     }
 
-    function selectAdminInscription($pseudo){
+    function selectAdminPseudo($pseudo)
+    {
         try {
             $connexion = $this->connection();
-            $requete = $connexion->prepare("SELECT 'admin' FROM utilisateurs where pseudo = '$pseudo'");
+            $requete = $connexion->prepare("SELECT * FROM utilisateurs where pseudo = '$pseudo'");
+            $requete->execute();
+            $resultat = $requete->fetch();
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+        }
+
+        return $resultat;
+    }
+
+    function selectAdminEmail($email)
+    {
+        try {
+            $connexion = $this->connection();
+            $requete = $connexion->prepare("SELECT * FROM utilisateurs where email = '$email'");
             $requete->execute();
             $resultat = $requete->fetch();
         } catch (PDOException $e) {

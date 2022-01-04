@@ -1,7 +1,9 @@
 @import url("https://fonts.googleapis.com/css2?family=Cairo:wght@200&family=Roboto+Mono:ital,wght@0,100;1,400&display=swap");
 body {
-  background-image: url(tintin.jpg);
-  background-position: fixed;
+  background-image: url(tintin.jpg) no-repeat;
+  background-attachment: fixed;
+  background-position: center center;
+  background-size: cover; 
   font-family: "Cairo", sans-serif;
   font-family: "Roboto Mono", monospace;
   color: rgba(0, 0, 0, 0.8);
@@ -84,4 +86,12 @@ nav a {
 
 hr{
   width: 100%;
+}
+
+#inscription.leftbutton{
+  color: #fff;
+  background: #22c566b9;
+  font-style: italic;
+  padding: 7px;
+  margin-left: 70%;
 }

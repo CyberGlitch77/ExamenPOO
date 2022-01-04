@@ -11,6 +11,8 @@
 
 <body>
     <?php
+    session_set_cookie_params(600);
+    session_start();
     include_once "./menu.php";
     include_once "../controleur/quiz.php";
     $quiz = new quiz();

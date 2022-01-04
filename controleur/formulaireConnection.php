@@ -41,9 +41,13 @@ class formulaireConnection extends connectionBDD
     {
 
         $psw = $this->bdd->selectUsersPseudoPsw($pseudo);
-
-        if (password_verify($password, $psw)) {
-            $resultat =  1;
+        if (is_array($psw)) {
+            if (password_verify($password, $psw['password'])) {
+                $resultat =  1;
+            } else {
+                echo "❌ Mot de passe incorrect";
+                $resultat = 0;
+            }
         } else {
             echo "❌ Mot de passe incorrect";
             $resultat = 0;
@@ -63,6 +67,34 @@ class formulaireConnection extends connectionBDD
                 echo "❌ Mot de passe incorrect";
                 $resultat = 0;
             }
+        } else {
+            echo "❌ Mot de passe incorrect";
+            $resultat = 0;
+        }
+
+        return $resultat;
+    }
+
+    function verificationAdmin($emailPseudo)
+    {
+
+        $count = $this->bdd->selectUsersPseudo($emailPseudo);
+
+        switch ($count) {
+            case 1:
+                $resultat = $this->bdd->selectAdminPseudo($emailPseudo);
+                break;
+            case 0:
+                $count = $this->bdd->selectUsersEmail($emailPseudo);
+                switch ($count) {
+                    case 1:
+                        $resultat = $this->bdd->selectAdminEmail($emailPseudo);
+                        break;
+                    case 0:
+                        echo "❌ Un problème est survenu";
+                        $resultat = null;
+                        break;
+                }
         }
 
         return $resultat;
