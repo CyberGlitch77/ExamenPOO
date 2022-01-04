@@ -3,25 +3,28 @@
     <li><a href="./index.php">Accueil</a></li>
     <?php
     switch (true) {
-      case (session_status() == 1):
-        switch (true) {
-          case ($_SESSION["admin"] == 1):
+      case (session_status() == 2):
     ?>
-            <li><a href="./admin.php">Menu admin</li>
+        <li><a href="./quiz.php">Quiz</a></li>
+        <?php
+        switch (true) {
+          case (isset($_SESSION["pseudo"]) || isset($_SESSION["emailPseudo"])):
+        ?>
+            <li id="left"><a href="../controleur/deconnection.php">Se déconnecter</a></li>
+          <?php
+          case (isset($_SESSION["admin"]) && ($_SESSION["admin"] == 1)):
+          ?>
+            <li id="left"><a href="./admin.php">Menu admin</a></li>
           <?php
             break;
-          case (isset($_SESSION["pseudo"]) || isset($_SESSION["email"])):
+
+          default:
           ?>
-            <li id="left"><a href="./deconnection.php">Se déconnecter</li>
+            <li id="left"><a href="./inscription.php">Inscription</a></li>
+            <li id="left"><a href="./connection.php">Connection</a></li>
         <?php
-            break;
         }
-        break;
-      default:
-      print(session_status());
-        ?>
-        <li id="left"><a href="./inscription.php">Inscription</a></li>
-        <li id="left"><a href="./connection.php">Connection</a></li>
+        break; ?>
     <?php
         break;
     }

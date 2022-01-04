@@ -1,6 +1,4 @@
 <?php
-session_set_cookie_params(600);
-session_start();
 include_once "../controleur/accesBDD.php";
 class quiz extends connectionBDD
 {
@@ -10,6 +8,7 @@ class quiz extends connectionBDD
       // Initialisations générales
       $this->max_quest = 10; // Nbre maximum de questions à poser par quiz
       $this->nbr_rec = null; // nombre de records dans la table (inconnu au départ)
+      $this->resultat = [];
       $this->bdd = new connectionBDD();
    }
 
@@ -27,34 +26,26 @@ class quiz extends connectionBDD
             $_SESSION["tab_tir"] = $tab_tir;
             $_SESSION["score"] = $score;
          } else { // Toutes les autres fois
-
-            $nq = $_SESSION["nq"];
-            $tab_tir = $_SESSION["tab_tir"];
-            $score = $_SESSION["score"];
-            $ok = $_SESSION["ok"];
-            $resultat['rep'] = $_GET["rep"];
-            if ($resultat['rep'] == $ok) {
-               $score++;
+            $_SESSION["rep"] = $_GET['rep'];
+            if ($_SESSION["rep"] == $_SESSION["ok"]) {
+               $_SESSION["score"]++;
             }
-            $nq++;
-            $_SESSION["nq"] = $nq;
-            $_SESSION["score"] = $score;
+            $_SESSION["nq"]++;
          }
 
          // fin du quiz
-         if ($nq > $this->max_quest) {
-
-            echo "Votre quiz est terminé avec le score de <b>" . $score . " / " . $this->max_quest . "</B><br>";
-            echo "<a href=\"" . $_SERVER["PHP_SELF"] . "\"> Je voudrais refaire un autre quiz </a>";
-            session_destroy();
+         if ($_SESSION["nq"] > $this->max_quest) {
+            $_SESSION["nq"] = $_SESSION["tab_tir"] = $_SESSION["ok"] = null;
+            $_SESSION['max_quest'] = $this->max_quest;
+            header("Location: ./finQuiz.php");
          } else { // Pas la fin du quiz
 
             //Générer un nombre aléatoire de 0 à $nbr_rec - 1
             $tirage = TRUE;
             while ($tirage) {
                $x = rand(1, $this->nbr_rec);  // Générer un nombre aléatoire
-               if (!in_array($x, $tab_tir)) { //   Vérifier que le n° n'est pas déja sorti
-                  $tab_tir[] = $x;
+               if (!in_array($x, $_SESSION["tab_tir"])) { //   Vérifier que le n° n'est pas déja sorti
+                  $tab_tir [] = $x;
                   $_SESSION["tab_tir"] = $tab_tir;
                   $tirage = FALSE;
                }
