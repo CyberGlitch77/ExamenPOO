@@ -1,32 +1,21 @@
 <?php
 include_once "../controleur/session.php";
 include_once "../controleur/quiz.php";
-$page = $_SERVER['PHP_SELF'];
-$sec = "16";
 ?>
 <!DOCTYPE html>
 
 <head>
-    <meta charset="UTF-8" http-equiv="refresh" content="<?php echo $sec; ?>;URL='<?php echo $page; ?>'">
     <link rel="stylesheet" type="text/css" href="./style.css">
-    <script type="module" src="../controleur/timer.js" async></script>
-    <title>Document</title>
+    <script src="../controleur/timer.js" async></script>
+    <title>Quiz à questions</title>
 </head>
 
-<body onload="timedText()">
+<body onload="timedText(15)">
     <?php
     include_once "./menu.php";
-    if ($_SESSION['i'] == null || $_SESSION['i'] < 0) {
-        $_SESSION['i'] = 0;
-    }
     $quiz = new quiz();
     if (isset($_SESSION["pseudo"]) || isset($_SESSION["emailPseudo"])) {
-        $resultat = $quiz->jeu();
-        $_SESSION['questionResultat'][$_SESSION['i']] = $resultat['question'];
-        echo $_SESSION['questionResultat'][$_SESSION['i']];
-        $_SESSION['reponseResultat'][$_SESSION['i']] = $resultat['reponse'];
-        echo $_SESSION['reponseResultat'][$_SESSION['i']];
-        $_SESSION['i']++;
+        $resultat = $quiz->jeuFixe();
     }
     ?>
     <div id="bords">
@@ -65,14 +54,13 @@ $sec = "16";
                     </table>
                 </fieldset>
             </form>
-        <?php
-                if (isset($_GET['rep'])) {
-                    $_SESSION['reponseUtilisateur'][$_SESSION['i']-1] = $_SESSION['rep'];
-                } else  {
-                    $_SESSION['reponseUtilisateur'][$_SESSION['i']-1] = 0;
-                }
-                echo $_SESSION['reponseUtilisateur'][$_SESSION['i']-1];
+            <?php
+            if (isset($_GET['rep'])) {
+
+                $_SESSION['reponseUtilisateur'][$_SESSION['i']-1] = $_SESSION['rep'];
+            }
             $_SESSION["ok"] = $resultat['reponse'];
+            $_SESSION['i']++;
         } else { ?>
             <h2 class="titre">Pour pouvoir jouer vous devez vous inscrire ou vous connecter</h2>
             <div class="centrer">

@@ -12,7 +12,7 @@ class quiz extends connectionBDD
       $this->bdd = new connectionBDD();
    }
 
-   function jeu()
+   function jeuFixe()
    {
       $this->nbr_rec = $this->bdd->numQuestions();
 
@@ -28,21 +28,22 @@ class quiz extends connectionBDD
          } else { // Toutes les autres fois
             if (isset($_GET['rep'])) {
                $_SESSION["rep"] = $_GET['rep'];
-            }
-            if ($_SESSION["rep"] == $_SESSION["ok"]) {
-               $_SESSION["score"]++;
+               if ($_SESSION["rep"] == $_SESSION["ok"]) {
+                  $_SESSION["score"]++;
+               }
             }
             $_SESSION["nq"]++;
          }
 
+         if (!isset($_SESSION['i']) || $_SESSION['i'] < 0 || $_SESSION['i'] > 10) {
+            $_SESSION['i'] = 0;
+         }
          // fin du quiz
          if ($_SESSION["nq"] > $this->max_quest) {
+            $_SESSION['i']++;
             if (isset($_GET['rep'])) {
                $_SESSION['reponseUtilisateur'][$_SESSION['i'] - 1] = $_SESSION['rep'];
-            } else {
-               $_SESSION['reponseUtilisateur'][$_SESSION['i'] - 1] = 0;
             }
-            echo $_SESSION['reponseUtilisateur'][$_SESSION['i'] - 1];
             $_SESSION["nq"] = $_SESSION["tab_tir"] = $_SESSION["ok"] = null;
             $_SESSION['max_quest'] = $this->max_quest;
             header("Location: ./finQuiz.php");
@@ -62,9 +63,13 @@ class quiz extends connectionBDD
 
          $resultat = $this->bdd->answers($x);
 
+         $_SESSION['questionResultat'][$_SESSION['i']] = $resultat['question'];
+         $_SESSION['reponseResultat'][$_SESSION['i']] = $resultat['reponse'];
+
          return $resultat;
       } else {
          echo "❌ Echec de la connection à la base de données";
       }
    }
 }
+?>

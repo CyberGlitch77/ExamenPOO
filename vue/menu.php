@@ -5,7 +5,8 @@
     switch (true) {
       case (session_status() == 2):
     ?>
-        <li><a href="./quiz.php">Quiz</a></li>
+        <li><a href="../controleur/reset.php">Quiz</a></li>
+        <li><a href="./classement.php">Classement</a></li>
         <?php
         switch (true) {
           case (isset($_SESSION["pseudo"]) || isset($_SESSION["emailPseudo"])):

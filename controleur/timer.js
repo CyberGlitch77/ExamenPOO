@@ -1,10 +1,12 @@
-window.onload = timedText;
-function timedText() {
+function timedText(temps) {
   var div = document.getElementById("timer"),
-    counter = 15;
+    counter = temps;
   var timer = setInterval(function () {
     div.innerHTML = "Temps restant:"+ counter + " seconde(s)";
-    if (counter === 0) return clearInterval(timer);
+    if (counter === 0){
+      location.reload(true);
+      return clearInterval(timer);
+    }
     counter--;
   }, 1000);
 }
