@@ -16,25 +16,17 @@ $reponse = new reponse();
     include_once "./menu.php";
     ?>
     <div id="bords">
+        <h1></h1>
         <h2>Votre quiz est terminé avec le score de <?php echo $_SESSION["score"]; ?> / <?php echo $_SESSION["max_quest"]; ?><br></h2>
         <?php
         $i = 0;
-        while ($i < 10) { 
-            if($_SESSION['reponseUtilisateur'][$i] !=0){
-            $reponseUtilisateur = "vous avez répondu : " . $reponse->reponseQuiz($_SESSION['questionResultat'][$i],$reponse = "r".$_SESSION['reponseUtilisateur'][$i]);
-            }else{
-                $reponseUtilisateur = "vous n'avez rien répondu";
-            }
-            $reponseQuestion = $reponse->reponseQuiz($_SESSION['questionResultat'][$i],$reponse = "r".$_SESSION['reponseResultat'][$i]);
-            if($reponseUtilisateur == $reponseQuestion){
-                $correct = "✅";
-            }else{
-               $correct = "❌"; 
-            }
-            ?>
+        while ($i < 10) {
+            $resultat = $reponse->reponseQuiz($i);
+        ?>
             <table>
                 <tr>
-                    <td><?php echo $i + 1; ?>. <?php echo  $_SESSION['questionResultat'][$i]; ?><br> La réponse était <?php echo $_SESSION['reponseResultat'][$i]; ?> et <?php echo $reponseUtilisateur; echo $correct ?></td>
+                    <td><?php echo $i + 1; ?>. <?php echo  $_SESSION['questionResultat'][$i]; ?><br>
+                        <?php echo $resultat['resultat']; ?> "<?php echo $resultat["utilisateur"]; ?>"<?php echo $resultat['correct']; ?></td>
                 </tr>
             </table>
         <?php
