@@ -26,7 +26,9 @@ class quiz extends connectionBDD
             $_SESSION["tab_tir"] = $tab_tir;
             $_SESSION["score"] = $score;
          } else { // Toutes les autres fois
-            $_SESSION["rep"] = $_GET['rep'];
+            if (isset($_GET['rep'])) {
+               $_SESSION["rep"] = $_GET['rep'];
+            }
             if ($_SESSION["rep"] == $_SESSION["ok"]) {
                $_SESSION["score"]++;
             }
@@ -35,6 +37,12 @@ class quiz extends connectionBDD
 
          // fin du quiz
          if ($_SESSION["nq"] > $this->max_quest) {
+            if (isset($_GET['rep'])) {
+               $_SESSION['reponseUtilisateur'][$_SESSION['i'] - 1] = $_SESSION['rep'];
+            } else {
+               $_SESSION['reponseUtilisateur'][$_SESSION['i'] - 1] = 0;
+            }
+            echo $_SESSION['reponseUtilisateur'][$_SESSION['i'] - 1];
             $_SESSION["nq"] = $_SESSION["tab_tir"] = $_SESSION["ok"] = null;
             $_SESSION['max_quest'] = $this->max_quest;
             header("Location: ./finQuiz.php");
@@ -45,7 +53,7 @@ class quiz extends connectionBDD
             while ($tirage) {
                $x = rand(1, $this->nbr_rec);  // Générer un nombre aléatoire
                if (!in_array($x, $_SESSION["tab_tir"])) { //   Vérifier que le n° n'est pas déja sorti
-                  $tab_tir [] = $x;
+                  $tab_tir[] = $x;
                   $_SESSION["tab_tir"] = $tab_tir;
                   $tirage = FALSE;
                }

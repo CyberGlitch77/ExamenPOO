@@ -155,4 +155,18 @@ class connectionBDD
 
         return $resultat;
     }
+
+    function selectReponse($question, $reponse)
+    {
+        try {
+            $connexion = $this->connection();
+            $requete = $connexion->prepare("SELECT $reponse FROM quiz where question = '$question'");
+            $requete->execute();
+            $resultat = $requete->fetch();
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+        }
+
+        return $resultat;
+    }
 }

@@ -16,22 +16,27 @@ $sec = "16";
 <body onload="timedText()">
     <?php
     include_once "./menu.php";
-    if ($_SESSION['i'] == null || $_SESSION['i'] < 0) {
-        $_SESSION['i'] = 0;
-    }
+
     $quiz = new quiz();
     if (isset($_SESSION["pseudo"]) || isset($_SESSION["emailPseudo"])) {
+        $i = 0;
         $resultat = $quiz->jeu();
-        $_SESSION['questionResultat'][$_SESSION['i']] = $resultat['question'];
-        echo $_SESSION['questionResultat'][$_SESSION['i']];
-        $_SESSION['reponseResultat'][$_SESSION['i']] = $resultat['reponse'];
-        echo $_SESSION['reponseResultat'][$_SESSION['i']];
-        $_SESSION['i']++;
+        $_SESSION['questionResultat'][$i] = $resultat['question'];
+        echo $_SESSION['questionResultat'][$i];
+        if (isset($_GET['rep'])) {
+            $_SESSION['reponseUtilisateur'][$i-1] = $_SESSION['rep'];
+        } else if($i-1 >-1) {
+            $_SESSION['reponseUtilisateur'][$i-1] = 0;
+        }
+        echo $_SESSION['reponseUtilisateur'][$i];
+        $_SESSION['reponseResultat'][$i] = $resultat['reponse'];
+        echo $_SESSION['reponseResultat'][$i];
+        $i++;
     }
     ?>
     <div id="bords">
 
-        <h1 class="titre">Quiz Fixe</h1>
+        <h1 class="titre">Quiz Variable</h1>
         <hr>
         <?php
         if (isset($_SESSION["pseudo"]) || isset($_SESSION["emailPseudo"])) {
@@ -65,13 +70,7 @@ $sec = "16";
                     </table>
                 </fieldset>
             </form>
-        <?php
-                if (isset($_GET['rep'])) {
-                    $_SESSION['reponseUtilisateur'][$_SESSION['i']-1] = $_SESSION['rep'];
-                } else  {
-                    $_SESSION['reponseUtilisateur'][$_SESSION['i']-1] = 0;
-                }
-                echo $_SESSION['reponseUtilisateur'][$_SESSION['i']-1];
+            <?php
             $_SESSION["ok"] = $resultat['reponse'];
         } else { ?>
             <h2 class="titre">Pour pouvoir jouer vous devez vous inscrire ou vous connecter</h2>

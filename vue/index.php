@@ -5,7 +5,7 @@ include_once "../controleur/session.php";
 
 <head>
     <meta charset="UTF-8">
-    <script type="module" src="../controleur/event.js" async></script>
+    <script type="module" src="../controleur/eventRedirection.js" async></script>
     <link rel="stylesheet" href="./style.css">
     <title>Quiz</title>
 </head>
