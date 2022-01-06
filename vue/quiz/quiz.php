@@ -1,18 +1,18 @@
 <?php
-include_once "../controleur/session.php";
-include_once "../controleur/quiz.php";
+include_once "../../controleur/utilitaires/session.php";
+include_once "../../controleur/quiz/quiz.php";
 ?>
 <!DOCTYPE html>
 
 <head>
-    <link rel="stylesheet" type="text/css" href="./style.css">
-    <script src="../controleur/timer.js" async></script>
+    <link rel="stylesheet" type="text/css" href="../../vue/design/style.css">
+    <script src="../../controleur/JS/timer.js" async></script>
     <title>Quiz à questions</title>
 </head>
 
 <body onload="timedText(15)">
     <?php
-    include_once "./menu.php";
+    include_once "../../vue/design/menu.php";
     $quiz = new quiz();
     if (isset($_SESSION["pseudo"]) || isset($_SESSION["emailPseudo"])) {
         $resultat = $quiz->jeuFixe();
@@ -56,8 +56,7 @@ include_once "../controleur/quiz.php";
             </form>
             <?php
             if (isset($_GET['rep'])) {
-
-                $_SESSION['reponseUtilisateur'][$_SESSION['i']-1] = $_SESSION['rep'];
+                $_SESSION['reponseUtilisateur'][$_SESSION['i'] - 1] = $_SESSION['rep'];
             }
             $_SESSION["ok"] = $resultat['reponse'];
             $_SESSION['i']++;
@@ -69,7 +68,7 @@ include_once "../controleur/quiz.php";
             </div>
         <?php } ?>
     </div>
-    <footer id="footer"><?php include_once './footer.php' ?></footer>
+    <footer id="footer"><?php include_once '../design/footer.php' ?></footer>
 </body>
 
 </html>

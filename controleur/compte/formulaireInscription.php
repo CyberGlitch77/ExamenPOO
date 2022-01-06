@@ -1,6 +1,6 @@
 <?php
 
-include_once "../controleur/accesBDD.php";
+include_once "../../controleur/acces/accesBDD.php";
 
 class formulaireInscription extends connectionBDD
 {

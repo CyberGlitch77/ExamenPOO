@@ -1,5 +1,5 @@
 <?php
-include_once "../controleur/accesBDD.php";
+include_once "../../controleur/acces/accesBDD.php";
 class reponse extends connectionBDD
 {
     function __construct()

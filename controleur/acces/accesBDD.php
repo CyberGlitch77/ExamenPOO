@@ -172,4 +172,17 @@ class connectionBDD
 
         return $resultat;
     }
+
+    function selectUsers(){
+        try {
+            $connexion = $this->connection();
+            $requete = $connexion->prepare("SELECT * FROM `utilisateurs` ORDER BY `utilisateurs`.`scorePond` DESC");
+            $requete->execute();
+            $resultat = $requete->fetchAll();
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+        }
+
+        return $resultat;
+    }
 }

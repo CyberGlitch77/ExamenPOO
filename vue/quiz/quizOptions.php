@@ -1,23 +1,17 @@
 <?php
-include_once "../controleur/session.php";
+include_once "../../controleur/utilitaires/session.php";
 ?>
 <!DOCTYPE html>
 
 <head>
-    <link rel="stylesheet" type="text/css" href="./style.css">
-    <?php
-    if (isset($_SESSION["pseudo"]) || isset($_SESSION["emailPseudo"])) {
-    ?>
-        <script type="module" src="../controleur/timer.js" async></script>
-    <?php } else { ?>
-        <script type="module" src="../controleur/eventRedirection.js" async></script>
-    <?php } ?>
+    <link rel="stylesheet" type="text/css" href="../design/style.css">
+    <script type="module" src="../../controleur/JS/buttonConnection.js" async></script>
     <title>Options du Quiz</title>
 </head>
 
 <body>
     <?php
-    include_once "./menu.php";
+    include_once "../design/menu.php";
     ?>
     <div id="bords">
 
@@ -45,21 +39,21 @@ include_once "../controleur/session.php";
                     Si vous prenez le quiz à questions vous aurez un chronomètre aléatoire se situant entre 10 secondes et 45 secondes ou 1minute à 2minutes pour le quiz entier</h3>
                 <input type="submit" id='button' value="C'est parti">
             </form>
-        <?php
-            if(isset($_POST['quiz']) && isset($_POST['chrono'])){
+            <?php
+            if (isset($_POST['quiz']) && isset($_POST['chrono'])) {
                 $_SESSION['quiz'] = $_POST['quiz'];
                 $_SESSION['chrono'] = $_POST['chrono'];
                 header("Location: ./quiz.php");
             }
         } else { ?>
-            <h2 class="titre">Pour pouvoir jouer vous devez vous inscrire ou vous connecter!!!</h2>
+            <h2 class="titre">Pour pouvoir jouer au quiz vous devez vous connecter!!!</h2>
             <div class="centrer">
                 <button id="inscription" class="leftbutton">Inscription</button>
                 <button id="connection" class="rightbutton">Connection</button>
             </div>
         <?php } ?>
     </div>
-    <footer id="footer"><?php include_once './footer.php' ?></footer>
+    <footer id="footer"><?php include_once '../design/footer.php' ?></footer>
 </body>
 
 </html>

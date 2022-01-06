@@ -1,5 +1,5 @@
 <?php
-include_once "../controleur/accesBDD.php";
+include_once "../../controleur/acces/accesBDD.php";
 class quiz extends connectionBDD
 {
 
@@ -40,12 +40,12 @@ class quiz extends connectionBDD
          }
          // fin du quiz
          if ($_SESSION["nq"] > $this->max_quest) {
-            $_SESSION['i']++;
             if (isset($_GET['rep'])) {
                $_SESSION['reponseUtilisateur'][$_SESSION['i'] - 1] = $_SESSION['rep'];
             }
             $_SESSION["nq"] = $_SESSION["tab_tir"] = $_SESSION["ok"] = null;
             $_SESSION['max_quest'] = $this->max_quest;
+            $_SESSION['i']++;
             header("Location: ./finQuiz.php");
          } else { // Pas la fin du quiz
 

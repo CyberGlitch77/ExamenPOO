@@ -1,20 +1,18 @@
 <?php
-include_once "../controleur/session.php";
-include_once "../controleur/formulaireConnection.php";
+include_once "../../controleur/utilitaires/session.php";
+include_once "../../controleur/compte/formulaireConnection.php";
 ?>
 <!DOCTYPE html>
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./style.css">
-
+    <link rel="stylesheet" href="../design/style.css">
     <title>Connection</title>
 </head>
 
 <body>
     <?php
-    include_once "./menu.php";
+    include_once "../design/menu.php";
     $valid1 = $valid2 = 0;
     if (isset($_POST["emailPseudo"]) && isset($_POST["pswConn"])) {
         try {
@@ -69,7 +67,7 @@ include_once "../controleur/formulaireConnection.php";
             $_SESSION["emailPseudo"] = $_POST["emailPseudo"];
             $admin = $formConn->verificationAdmin($_SESSION["emailPseudo"]);
             $_SESSION["admin"] = $admin['admin'];
-            header("Location: ./index.php");
+            header("Location: ../../vue/index.php");
         } catch (Exception $e) {
             echo $e->getMessage();
         }
@@ -77,7 +75,7 @@ include_once "../controleur/formulaireConnection.php";
         $_POST["confirmPseudo"] = $_POST["email"] = $_POST["confirmEmail"] = $_POST["psw"] = $_POST["confirmPsw"] = null;
     }
     ?>
-    <footer id="footer"><?php include_once './footer.php' ?></footer>
+    <footer id="footer"><?php include_once '../design/footer.php' ?></footer>
 </body>
 
 </html>

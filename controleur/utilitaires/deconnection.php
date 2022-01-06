@@ -2,6 +2,6 @@
 session_start();
 session_unset();
 session_destroy();
-header("Location: ../vue/index.php");
+header("Location: ../../vue/index.php");
 die;
 ?>

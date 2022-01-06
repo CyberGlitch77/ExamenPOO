@@ -1,19 +1,18 @@
 <?php
-include_once "../controleur/session.php";
-include_once "../controleur/formulaireInscription.php";
+include_once "../../controleur/utilitaires/session.php";
+include_once "../../controleur/compte/formulaireInscription.php";
 ?>
 <!DOCTYPE html>
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="../design/style.css">
     <title>Inscription</title>
 </head>
 
 <body>
     <?php
-    include_once "./menu.php";
+    include_once "../design/menu.php";
     $valid1 = $valid2 = $valid3 = $valid4 = $valid5 = $valid6 = 0;
     if (isset($_POST["pseudo"]) && isset($_POST["email"]) && isset($_POST["psw"])) {
         $form = new formulaireInscription($_POST["pseudo"], $_POST["email"], $_POST["psw"]);
@@ -97,7 +96,7 @@ include_once "../controleur/formulaireInscription.php";
             $form->insertionInscription($_POST["pseudo"], $_POST["email"], $psw);
             $admin = $form->verificationAdmin($_SESSION["pseudo"]);
             $_SESSION["admin"] = $admin['admin'];
-            header("Location:./index.php");
+            header("Location:../index.php");
         } catch (Exception $e) {
             echo $e->getMessage();
         }
@@ -105,7 +104,7 @@ include_once "../controleur/formulaireInscription.php";
         $_POST["confirmPseudo"] = $_POST["email"] = $_POST["confirmEmail"] = $_POST["psw"] = $_POST["confirmPsw"] = null;
     }
     ?>
-    <footer id="footer"><?php include_once './footer.php' ?></footer>
+    <footer id="footer"><?php include_once '../design/footer.php' ?></footer>
 </body>
 
 </html>
