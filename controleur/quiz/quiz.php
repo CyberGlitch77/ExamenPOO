@@ -12,7 +12,7 @@ class quiz extends connectionBDD
       $this->bdd = new connectionBDD();
    }
 
-   function jeuFixe()
+   function jeu()
    {
       $this->nbr_rec = $this->bdd->numQuestions();
 
@@ -72,4 +72,3 @@ class quiz extends connectionBDD
       }
    }
 }
-?>

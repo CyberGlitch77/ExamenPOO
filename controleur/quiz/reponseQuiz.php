@@ -62,5 +62,14 @@ class reponse extends connectionBDD
 
         return $reponse;
     }
+
+    function ajoutScore($pseudo, $score)
+    {
+        $scoreMoy = $this->bdd->selectScoreUser($pseudo);
+        $score = $scoreMoy['scoreTotal'] + $score;
+        $essai = $scoreMoy['essais'] + 1;
+        $scorePond = intVal($score / $essai, 10);
+        $this->bdd->updateScore($pseudo, $score, $essai, $scorePond);
+    }
 }
 ?>

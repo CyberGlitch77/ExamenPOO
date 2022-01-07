@@ -7,6 +7,9 @@ include_once "../../controleur/quiz/classementQuiz.php";
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" type="text/css" href="../design/style.css">
+    <?php if (!isset($_SESSION["pseudo"]) && !isset($_SESSION["emailPseudo"])) { ?>
+        <script type="module" src="../../controleur/JS/buttonConnection.js" async></script>
+    <?php } ?>
     <title>Classement</title>
 </head>
 
@@ -24,9 +27,9 @@ include_once "../../controleur/quiz/classementQuiz.php";
             $i = 1;
             if (!empty($resultat)) {
                 foreach ($resultat as $row) { ?>
-                    <table>
+                    <table class="centrer" >
                         <tr>
-                            <td><?php echo $i; ?>. <?php echo $row["pseudo"] ?> a obtenu <?php echo $row["scorePond"]; ?> points en <?php echo $row["essais"] ?> parties</td><br>
+                            <td><h2 class="titre"><?php echo $i; ?>. <?php echo $row["pseudo"] ?> : moyenne de <?php echo $row["scorePond"]; ?> point(s), <?php echo $row["scoreTotal"]; ?> point(s) en <?php echo $row["essais"]?> partie(s).</h2></td><br>
                         </tr>
                     </table>
             <?php
@@ -37,7 +40,7 @@ include_once "../../controleur/quiz/classementQuiz.php";
         <?php
         } else {
         ?>
-            <h2 class="titre">Pour pouvoir jouer au quiz vous devez vous connecter!!!</h2>
+            <h2 class="titre">Pour pouvoir avoir accès au classement vous devez vous connecter!!!</h2>
             <div class="centrer">
                 <button id="inscription" class="leftbutton">Inscription</button>
                 <button id="connection" class="rightbutton">Connection</button>

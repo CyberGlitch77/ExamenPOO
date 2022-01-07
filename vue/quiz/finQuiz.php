@@ -17,24 +17,32 @@ $reponse = new reponse();
     include_once "../design/menu.php";
     ?>
     <div id="bords">
-        <h1 class="titre">Le résultat de votre quiz</h1><hr>
-        <h2 class="titre">Le score de votre quiz est de <?php echo $_SESSION["score"]; ?> / <?php echo $_SESSION["max_quest"]; ?><br>
+        <?php if (isset($_SESSION["pseudo"]) || isset($_SESSION["emailPseudo"])) { ?>
+            <h1 class="titre">Le résultat de votre quiz</h1>
             <hr>
-        </h2>
+            <h2 class="titre">Le score de votre quiz est de <?php echo $_SESSION["score"]; ?> / <?php echo $_SESSION["max_quest"]; ?><br>
+                <hr>
+            </h2>
+            <?php
+            $i = 0;
+            while ($i < 10) {
+                $resultat = $reponse->reponseQuiz($i);
+            ?>
+                <table>
+                    <tr>
+                        <td><?php echo $i + 1; ?>. <?php echo  $_SESSION['questionResultat'][$i]; ?><br>
+                            <?php echo $resultat['resultat']; ?> "<?php echo $resultat["utilisateur"]; ?>"<?php echo $resultat['correct']; ?></td>
+                    </tr>
+                </table>
+                <hr>
         <?php
-        $i = 0;
-        while ($i < 10) {
-            $resultat = $reponse->reponseQuiz($i);
-        ?>
-            <table>
-                <tr>
-                    <td><?php echo $i + 1; ?>. <?php echo  $_SESSION['questionResultat'][$i]; ?><br>
-                        <?php echo $resultat['resultat']; ?> "<?php echo $resultat["utilisateur"]; ?>"<?php echo $resultat['correct']; ?></td>
-                </tr>
-            </table>
-            <hr>
-        <?php
-            $i++;
+                $i++;
+            }
+            if (isset($_SESSION["pseudo"])) {
+                $reponse->ajoutScore($_SESSION["pseudo"], $_SESSION['score']);
+            } else {
+                $reponse->ajoutScore($_SESSION["emailPseudo"], $_SESSION['score']);
+            }
         }
         ?>
 

@@ -1,5 +1,3 @@
-"use strict";
-
 export class redirection {
   constructor() {}
 
@@ -17,7 +15,14 @@ export class redirection {
   }
 
   classement() {
-    window.location.href =
-      "../../../ExamenPOO/vue/quiz/classement.php";
+    window.location.href = "../../../ExamenPOO/vue/quiz/classement.php";
+  }
+
+  joueurAd() {
+    window.location.href = "./joueurAdmin.php";
+  }
+
+  quizAd() {
+    window.location.href = "./quizAdmin.php";
   }
 }

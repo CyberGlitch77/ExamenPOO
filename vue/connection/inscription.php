@@ -7,6 +7,7 @@ include_once "../../controleur/compte/formulaireInscription.php";
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="../design/style.css">
+    <script type="module" src="../../controleur/JS/eventValidation.js"> </script>
     <title>Inscription</title>
 </head>
 
@@ -34,7 +35,8 @@ include_once "../../controleur/compte/formulaireInscription.php";
                             if ($valid1 == 1) {
                                 $valid1 = $form->verificationPseudo($_POST["pseudo"]);
                             }
-                        } ?></td>
+                        } ?><div id='erreur1'></div>
+                            </td>
                 </tr>
                 <tr>
                     <td> <label for="confirmPseudo">Confirmation du pseudo :</label></td>

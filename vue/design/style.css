@@ -136,3 +136,25 @@ legend{
   font-style: italic;
   padding: 7px;
 }
+
+#buttonleft{
+  display: inline-block;
+  width: 25%;
+  text-align: center;
+  color: #fff;
+  background: #22c566b9;
+  font-style: italic;
+  padding: 7px;
+  margin-left: 10%;
+  margin-right: 25%;
+}
+
+#buttonright{
+  display: inline-block;
+  width: 25%;
+  text-align: center;
+  color: #fff;
+  background: #22c566b9;
+  font-style: italic;
+  padding: 7px;
+}
