@@ -28,7 +28,6 @@ document.getElementById("pseudo").oninput = function () {
 };
 
 document.getElementById("email").oninput = function () {
-  console.log(this.value);
   err="";
   var valeur = document.getElementById("email").value;
   var err = erreur.checkEmail(valeur);
