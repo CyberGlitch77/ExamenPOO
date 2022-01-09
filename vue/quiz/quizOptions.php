@@ -47,6 +47,7 @@ include_once "../../controleur/utilitaires/session.php";
             if (isset($_POST['type']) && isset($_POST['prog'])) {
                 $_SESSION['type'] = $_POST['type'];
                 $_SESSION['prog'] = $_POST['prog'];
+                $_SESSION['appele'] = false;
                 header("Location: ./quiz.php");
             }
         } else { ?>

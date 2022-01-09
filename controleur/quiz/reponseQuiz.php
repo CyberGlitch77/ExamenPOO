@@ -52,20 +52,20 @@ class reponse extends connectionBDD
             case 2:
             case 3:
             case 4:
-                $reponse['utilisateur'] = "et vous avez répondu : " . $reponse['utilisateur'];
+                $reponse['utilisateur'] = 'et vous avez répondu "'.$reponse['utilisateur'].'"';
                 break;
             default;
                 $reponse['utilisateur'] = "et vous n'avez rien répondu";
                 break;
         }
-        $reponse['resultat'] = "La réponse est : " . $reponse['resultat'];
+        $reponse['resultat'] = 'La réponse est : "' . $reponse['resultat'] . '"';
 
         return $reponse;
     }
 
     function ajoutScore($pseudo, $score)
     {
-        $scoreMoy = $this->bdd->selectScoreUser($pseudo);
+        $scoreMoy = $this->bdd-> selectScore($pseudo);
         $score = $scoreMoy['scoreTotal'] + $score;
         $essai = $scoreMoy['essais'] + 1;
         $scorePond = intVal($score / $essai, 10);

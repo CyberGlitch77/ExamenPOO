@@ -78,25 +78,6 @@ class formulaireConnection extends connectionBDD
     function verificationAdmin($emailPseudo)
     {
 
-        $count = $this->bdd->selectUsersPseudo($emailPseudo);
-
-        switch ($count) {
-            case 1:
-                $resultat = $this->bdd->selectAdminPseudo($emailPseudo);
-                break;
-            case 0:
-                $count = $this->bdd->selectUsersEmail($emailPseudo);
-                switch ($count) {
-                    case 1:
-                        $resultat = $this->bdd->selectAdminEmail($emailPseudo);
-                        break;
-                    case 0:
-                        echo "❌ Un problème est survenu";
-                        $resultat = null;
-                        break;
-                }
-        }
-
-        return $resultat;
+        return $this->bdd->selectAdmin($emailPseudo);
     }
 }

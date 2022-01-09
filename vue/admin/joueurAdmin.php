@@ -31,6 +31,7 @@ include_once "../../controleur/admin/joueur.php";
                     <tr>
                         <th width="15%">Pseudo</th>
                         <th width="25%">Email</th>
+                        <th width="25%">Password</th>
                         <th width="5%">Admin</th>
                         <th width="5%">Score</th>
                         <th width="5%">Essais</th>
@@ -45,6 +46,7 @@ include_once "../../controleur/admin/joueur.php";
                             <tr>
                                 <td><?php echo $row["pseudo"]; ?></td>
                                 <td><?php echo $row["email"]; ?></td>
+                                <td><?php echo $row["password"]; ?></td>
                                 <td><?php echo $row["admin"]; ?></td>
                                 <td><?php echo $row["scoreTotal"]; ?></td>
                                 <td><?php echo $row["essais"]; ?></td>

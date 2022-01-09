@@ -28,7 +28,7 @@ include_once "../../controleur/compte/formulaireInscription.php";
             <table class="centrer">
                 <tr>
                     <td> <label for="pseudo">Pseudo :</label></td>
-                    <td> <input type="text" id="pseudo" name="pseudo" <?php if (isset($_POST["pseudo"]) && !empty($_POST["pseudo"])) { ?> value="<?php echo $_POST["pseudo"]; ?>" <?php } ?> required><br>
+                    <td> <input  maxlength="12" type="text" id="pseudo" name="pseudo" <?php if (isset($_POST["pseudo"]) && !empty($_POST["pseudo"])) { ?> value="<?php echo $_POST["pseudo"]; ?>" <?php } ?> required><br>
                         <?php
                         if (isset($_POST["pseudo"])) {
                             $valid1 = $form->checkEmailPseudo($_POST["pseudo"]);
@@ -36,6 +36,8 @@ include_once "../../controleur/compte/formulaireInscription.php";
                                 $valid1 = $form->verificationPseudo($_POST["pseudo"]);
                             }
                         } ?><div id='erreur1'></div>
+                        <div id="erreur2"></div>
+                        <div id="erreur3"></div>
                             </td>
                 </tr>
                 <tr>
@@ -56,7 +58,7 @@ include_once "../../controleur/compte/formulaireInscription.php";
                             if ($valid3 == 1) {
                                 $valid3 = $form->verificationEmail($_POST["email"]);
                             }
-                        } ?></td>
+                        } ?><div id="erreur4"></div></td>
                 </tr>
                 <tr>
                     <td> <label for="confirmEmail">Confirmation de l'email :</label></td>
@@ -67,10 +69,13 @@ include_once "../../controleur/compte/formulaireInscription.php";
                 </tr>
                 <tr>
                     <td> <label for="psw">Mot de passe :</label></td>
-                    <td> <input type="password" id="psw" name="psw" required><br>
+                    <td> <input maxlength="20" type="password" id="psw" name="psw" required><br>
                         <?php if (isset($_POST["psw"])) {
                             $valid5 = $form->verificationPassword($_POST["psw"]);
-                        } ?></td>
+                        } ?><div id='erreur5'></div>
+                        <div id="erreur6"></div>
+                        <div id="erreur7"></div>
+                        <div id="erreur8"></div></td>
                 </tr>
                 <tr>
                     <td> <label for="confirmPsw">Confirmation du mot de passe :</label></td>

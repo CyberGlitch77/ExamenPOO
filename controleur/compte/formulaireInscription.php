@@ -17,7 +17,7 @@ class formulaireInscription extends connectionBDD
     {
         switch (true) {
 
-            case (!preg_match('/^[\w\d]{3,12}/', $pseudo)):
+            case (!preg_match('/^.*([\w\d ]){3,}.*$/', $pseudo)):
                 echo preg_match('/^[\w\d]{3,12}/', $pseudo);
                 echo "❌ Votre pseudo doit avoir entre 3 et 12 caractères<br>";
 
@@ -77,7 +77,7 @@ class formulaireInscription extends connectionBDD
     {
         switch (true) {
 
-            case (!preg_match('/^[\w\d]{8,20}/', $password)):
+            case (!preg_match('/^.*([\w\d ]){8,}.*$/', $password)):
                 echo "❌ Votre mot de passe doit avoir entre 8 et 20 caractères<br>";
 
             case (!preg_match('/^.*[a-zA-Z].*$/', $password)):
@@ -117,7 +117,7 @@ class formulaireInscription extends connectionBDD
     }
 
     function verificationAdmin($pseudo){
-        return $this->bdd->selectAdminInscription($pseudo);
+        return $this->bdd->selectAdmin($pseudo);
     }
 
     function checkEmailPseudo($emailPseudo)

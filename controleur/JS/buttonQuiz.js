@@ -7,6 +7,6 @@ document.getElementById("buttonQuiz").onclick = function () {
   };
   
   document.getElementById("buttonClassement").onclick = function () {
-    redirect.reset();
+    redirect.classement();
   };
   

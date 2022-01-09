@@ -31,17 +31,21 @@ $reponse = new reponse();
                 <table>
                     <tr>
                         <td><?php echo $i + 1; ?>. <?php echo  $_SESSION['questionResultat'][$i]; ?><br>
-                            <?php echo $resultat['resultat']; ?> "<?php echo $resultat["utilisateur"]; ?>"<?php echo $resultat['correct']; ?></td>
+                            <?php echo $resultat['resultat']; ?> <?php echo $resultat["utilisateur"]; ?><?php echo $resultat['correct']; ?></td>
                     </tr>
                 </table>
                 <hr>
         <?php
                 $i++;
             }
-            if (isset($_SESSION["pseudo"])) {
-                $reponse->ajoutScore($_SESSION["pseudo"], $_SESSION['score']);
-            } else {
-                $reponse->ajoutScore($_SESSION["emailPseudo"], $_SESSION['score']);
+            if (isset($_SESSION["appele"]) && $_SESSION["appele"] == false) {
+                if (isset($_SESSION["pseudo"])) {
+                    $_SESSION["appele"] = true;
+                    $reponse->ajoutScore($_SESSION["pseudo"], $_SESSION['score']);
+                } else {
+                    $_SESSION["appele"] = true;
+                    $reponse->ajoutScore($_SESSION["emailPseudo"], $_SESSION['score']);
+                }
             }
         }
         ?>

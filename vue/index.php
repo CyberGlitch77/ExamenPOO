@@ -18,11 +18,12 @@ include_once "../controleur/utilitaires/session.php";
         <?php
         if (isset($_SESSION["pseudo"]) || isset($_SESSION["emailPseudo"])) {
         ?>
-                    <h1 class="titre">Bienvenu à toi <?php  if (isset($_SESSION["pseudo"])){
-                echo $_SESSION["pseudo"];
-            } else {
-                echo $_SESSION["emailPseudo"];
-            }?></h1>
+            <h1 class="titre">Bienvenu à toi
+                <?php if (isset($_SESSION["pseudo"])) {
+                    echo $_SESSION["pseudo"];
+                } else {
+                    echo $_SESSION["emailPseudo"];
+                } ?></h1>
         <?php
         } else {
         ?>

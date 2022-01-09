@@ -43,6 +43,7 @@ class quiz extends connectionBDD
             if (isset($_GET['rep'])) {
                $_SESSION['reponseUtilisateur'][$_SESSION['i'] - 1] = $_SESSION['rep'];
             }
+            $tab_tir = $_SESSION["tab_tir"];
             $_SESSION["nq"] = $_SESSION["tab_tir"] = $_SESSION["ok"] = null;
             $_SESSION['max_quest'] = $this->max_quest;
             $_SESSION['i']++;

@@ -128,11 +128,11 @@ class connectionBDD
         return $resultat;
     }
 
-    function selectAdminPseudo($pseudo)
+    function selectAdmin($pseudo)
     {
         try {
             $connexion = $this->connection();
-            $requete = $connexion->prepare("SELECT * FROM utilisateurs where pseudo = '$pseudo'");
+            $requete = $connexion->prepare("SELECT * FROM utilisateurs WHERE pseudo = '$pseudo' || email = '$pseudo' ");
             $requete->execute();
             $resultat = $requete->fetch();
         } catch (PDOException $e) {
@@ -142,19 +142,6 @@ class connectionBDD
         return $resultat;
     }
 
-    function selectAdminEmail($email)
-    {
-        try {
-            $connexion = $this->connection();
-            $requete = $connexion->prepare("SELECT * FROM utilisateurs where email = '$email'");
-            $requete->execute();
-            $resultat = $requete->fetch();
-        } catch (PDOException $e) {
-            echo $e->getMessage();
-        }
-
-        return $resultat;
-    }
 
     function selectQuestion($qst)
     {
@@ -187,7 +174,7 @@ class connectionBDD
         return $resultat;
     }
 
-    function selectScoreUser($pseudo)
+    function selectScore($pseudo)
     {
         try {
             $connexion = $this->connection();
@@ -311,7 +298,7 @@ class connectionBDD
         }
     }
 
-    
+
     function selectAnswer($id)
     {
         try {
